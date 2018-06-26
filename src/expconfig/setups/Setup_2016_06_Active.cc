@@ -38,12 +38,13 @@ using namespace ant::expconfig::setup;
 Setup_2016_06_Active::Setup_2016_06_Active(const string& name, OptionsPtr opt) :
     Setup(name, opt),
     MCTaggerHits(opt->Get<bool>("MCTaggerHits",false)),
+    pizzaInstalled(true),
     Trigger(make_shared<detector::Trigger_2014>()),
     Tagger(make_shared<detector::Tagger_2015>()),
     CB(make_shared<detector::CB>()),
     PID(make_shared<detector::PID_2014>()),
-    TAPS(make_shared<detector::TAPS_2013_11>(Cherenkov != nullptr, false)), // false = don't use sensitive channels
-    TAPSVeto(make_shared<detector::TAPSVeto_2014>(Cherenkov != nullptr)),
+    TAPS(make_shared<detector::TAPS_2013_11>(Cherenkov != nullptr, pizzaInstalled, false)), // false = don't use sensitive channels
+    TAPSVeto(make_shared<detector::TAPSVeto_2014>(Cherenkov != nullptr, pizzaInstalled)),
     APT(make_shared<detector::APT_2017>())
 {
     // add the detectors of interest
